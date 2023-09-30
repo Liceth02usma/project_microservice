@@ -22,6 +22,7 @@ public class Permission {
     public String get_id() {
         return _id;
     }
+    
     public String getUrl() {
         return url;
     }
