@@ -4,7 +4,6 @@ import com.mssecurity.mssecurity.Models.Permission;
 import com.mssecurity.mssecurity.Models.Role;
 import com.mssecurity.mssecurity.Models.RolePermission;
 import com.mssecurity.mssecurity.Models.User;
-import com.mssecurity.mssecurity.Repositories.PermissionRepository;
 import com.mssecurity.mssecurity.Repositories.RolePermissionRepository;
 import com.mssecurity.mssecurity.Repositories.UserRepository;
 import com.mssecurity.mssecurity.Services.JwtService;
