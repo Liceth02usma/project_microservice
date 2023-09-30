@@ -8,33 +8,32 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document()
 public class Role {
     @Id
-    private String _id_role;
-    private String role_name;
+    private String _id;
+    private String name;
     private String description;
 
     public Role(String name, String description) {
-        this.role_name = name;
+        this.name = name;
         this.description = description;
     }
 
     public String get_id() {
-        return _id_role;
+        return _id;
     }
 
-
-    public String getRole_Name() {
-        return role_name;
+    public String getname() {
+        return name;
     }
 
-    public void setName(String role_name) {
-        this.role_name = role_name;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getDescription() {
+    public String getdescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setdescription(String description) {
         this.description = description;
     }
 }
