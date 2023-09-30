@@ -1,5 +1,5 @@
 package com.mssecurity.mssecurity.Interceptors;
-
+/*
 import com.mssecurity.mssecurity.Models.Permission;
 import com.mssecurity.mssecurity.Models.Role;
 import com.mssecurity.mssecurity.Models.RolePermission;
@@ -67,7 +67,7 @@ public class SecurityInterceptor implements HandlerInterceptor {
 
                 Permission thePermission=this.thePermissionRepository.getPermission(url,method);
                 if(theRole!=null && thePermission!=null){
-                    System.out.println("Rol "+theRole.getName()+ " Permission "+thePermission.getUrl());
+                    System.out.println("Rol "+theRole.getRole_Name()+ " Permission "+thePermission.getUrl());
                     RolePermission theRolePermission=this.theRolePermissionRepository.getRolePermission(theRole.get_id(),thePermission.get_id());
                     if (theRolePermission==null){
                         success=false;
@@ -96,3 +96,5 @@ public class SecurityInterceptor implements HandlerInterceptor {
         // Lógica a ejecutar después de completar la solicitud, incluso después de la renderización de la vista
     }
 }
+
+ */
