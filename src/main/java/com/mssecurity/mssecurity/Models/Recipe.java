@@ -1,30 +1,26 @@
 package com.mssecurity.mssecurity.Models;
 
+import lombok.Data;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import lombok.Data;
-
 @Data
-@Document
-public class User {
+@Document()
+public class Recipe {
     @Id
     private String _id;
     private String name;
-    private String password;
+    private String instructions;
 
-    @DBRef
-    private Role role;
-
-    public User(String name, String password) {
+    public Recipe(String name, String instructions) {
         this.name = name;
-        this.password = password;
+        this.instructions = instructions;
     }
 
     public String get_id() {
         return _id;
     }
+
 
     public String getName() {
         return name;
@@ -34,11 +30,11 @@ public class User {
         this.name = name;
     }
 
-    public String getPassword() {
-        return password;
+    public String getInstructions() {
+        return instructions;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setInstructions(String instructions) {
+        this.instructions = instructions;
     }
 }
