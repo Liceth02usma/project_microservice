@@ -1,7 +1,7 @@
 package com.mssecurity.mssecurity.Controllers;
 
 import com.mssecurity.mssecurity.Models.*;
-import com.mssecurity.mssecurity.Repositories.IngredientsRecipeRepository;
+import com.mssecurity.mssecurity.Repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +14,10 @@ import java.util.List;
 public class IngredientsRecipeController {
     @Autowired
     private IngredientsRecipeRepository theIngredientsRecipeRepository;
-
+    @Autowired
+    private IngredientsRepository theIngredientsRepository;
+    @Autowired
+    private RecipeRepository theRecipeRepository;
 
 
     @GetMapping("")
@@ -38,13 +41,13 @@ public class IngredientsRecipeController {
                                 @PathVariable String Recipe_id) {
         Ingredients theIngredients=this.theIngredientsRepository.findById(ingredients_id)
                 .orElse(null);
-        Permission thePermission=this.theRecipeRepository.findById(Recipe_id)
+        Recipe theRecipe=this.theRecipeRepository.findById(Recipe_id)
                 .orElse(null);
-        if(theIngredients!=null && thePermission!=null){
+        if(theIngredients!=null && theRecipe!=null){
             IngredientsRecipe newIngredientsRecipe=new IngredientsRecipe();
             newIngredientsRecipe.setIngredient(theIngredients);
-            newIngredientsRecipe.setPermission(thePermission);
-            return this.theIngredientsRecipeRepository.save(newRolePermission);
+            newIngredientsRecipe.setRecipe(theRecipe);
+            return this.theIngredientsRecipeRepository.save(newIngredientsRecipe);
         }else{
             return null;
         }

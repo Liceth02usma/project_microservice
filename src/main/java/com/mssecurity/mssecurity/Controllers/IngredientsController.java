@@ -1,7 +1,6 @@
 package com.mssecurity.mssecurity.Controllers;
 
 import com.mssecurity.mssecurity.Models.Ingredients;
-import com.mssecurity.mssecurity.Models.Recipe;
 import com.mssecurity.mssecurity.Repositories.IngredientsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
