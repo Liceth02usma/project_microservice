@@ -10,7 +10,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("api/roles")
+@RequestMapping("private/roles")
 public class RoleController {
     @Autowired
     private RoleRepository theRoleRepository;
