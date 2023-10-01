@@ -16,10 +16,10 @@ public class RecipeController {
     @Autowired
     private RecipeRepository theRecipeRepository;
 
-
-
     @GetMapping("")
-    public List<Recipe> index() {return this.theRecipeRepository.findAll();}
+    public List<Recipe> index() {
+        return this.theRecipeRepository.findAll();
+    }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
@@ -59,6 +59,5 @@ public class RecipeController {
             this.theRecipeRepository.delete(theRecipe);
         }
     }
-
 
 }

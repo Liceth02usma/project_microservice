@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Data
 @Document()
-public class Ingredients {
+public class Ingredient {
 
     @Id
     private String _id;
@@ -18,7 +18,7 @@ public class Ingredients {
     private int amount;
     private String category;
 
-    public Ingredients(String name, LocalDateTime dateInquisition, int amount, String category) {
+    public Ingredient(String name, LocalDateTime dateInquisition, int amount, String category) {
         this.name = name;
         this.dateInquisition = dateInquisition;
         this.amount = amount;
@@ -28,7 +28,6 @@ public class Ingredients {
     public String get_id() {
         return _id;
     }
-
 
     public String getName() {
         return name;

@@ -6,44 +6,44 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import com.mssecurity.mssecurity.Models.Ingredients;
-import com.mssecurity.mssecurity.Repositories.IngredientsRepository;
+import com.mssecurity.mssecurity.Models.Ingredient;
+import com.mssecurity.mssecurity.Repositories.IngredientRepository;
 
 @CrossOrigin
 @RestController
-@RequestMapping("private/ingredients")
+@RequestMapping("private/ingredient")
 public class IngredientsController {
     @Autowired
-    private IngredientsRepository theIngredientsRepository;
+    private IngredientRepository theIngredientRepository;
 
     @GetMapping("")
-    public List<Ingredients> index() {return this.theIngredientsRepository.findAll();}
+    public List<Ingredient> index() {return this.theIngredientRepository.findAll();}
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public Ingredients store(@RequestBody Ingredients newIngredients) {
-        return this.theIngredientsRepository.save(newIngredients);
+    public Ingredient store(@RequestBody Ingredient newIngredient) {
+        return this.theIngredientRepository.save(newIngredient);
     }
 
     @GetMapping("{id}")
-    public Ingredients show(@PathVariable String id) {
-        Ingredients theIngredients = this.theIngredientsRepository
+    public Ingredient show(@PathVariable String id) {
+        Ingredient theIngredient = this.theIngredientRepository
                 .findById(id)
                 .orElse(null);
-        return theIngredients;
+        return theIngredient;
     }
 
     @PutMapping("{id}")
-    public Ingredients update(@PathVariable String id, @RequestBody Ingredients theNewIngredients) {
-        Ingredients theActualIngredients = this.theIngredientsRepository
+    public Ingredient update(@PathVariable String id, @RequestBody Ingredient theNewIngredient) {
+        Ingredient theActualIngredient = this.theIngredientRepository
                 .findById(id)
                 .orElse(null);
-        if (theActualIngredients != null) {
-            theActualIngredients.setName(theNewIngredients.getName());
-            theActualIngredients.setAmount(theNewIngredients.getAmount());
-            theActualIngredients.setCategory(theNewIngredients.getCategory());
-            theActualIngredients.setDateInquisition(theNewIngredients.getDateInquisition());
-            return this.theIngredientsRepository.save(theActualIngredients);
+        if (theActualIngredient != null) {
+            theActualIngredient.setName(theNewIngredient.getName());
+            theActualIngredient.setAmount(theNewIngredient.getAmount());
+            theActualIngredient.setCategory(theNewIngredient.getCategory());
+            theActualIngredient.setDateInquisition(theNewIngredient.getDateInquisition());
+            return this.theIngredientRepository.save(theActualIngredient);
         } else {
             return null;
         }
@@ -52,11 +52,11 @@ public class IngredientsController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("{id}")
     public void destroy(@PathVariable String id) {
-        Ingredients theIngredients = this.theIngredientsRepository
+        Ingredient theIngredient = this.theIngredientRepository
                 .findById(id)
                 .orElse(null);
-        if (theIngredients != null) {
-            this.theIngredientsRepository.delete(theIngredients);
+        if (theIngredient != null) {
+            this.theIngredientRepository.delete(theIngredient);
         }
     }
 

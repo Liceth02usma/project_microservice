@@ -12,25 +12,21 @@ public class IngredientsRecipe {
     @Id
     private String _id;
     @DBRef
-    private Ingredients ingredient;
+    private Ingredient ingredient;
     @DBRef
     private Recipe recipe;
 
-
-    public IngredientsRecipe(Ingredients ingredient, Recipe recipe) {
-        this.ingredient = ingredient;
-        this.recipe = recipe;
-    }
+    public IngredientsRecipe() {}
 
     public String get_id() {
         return _id;
     }
 
-    public Ingredients getIngredient() {
+    public Ingredient getIngredient() {
         return ingredient;
     }
 
-    public void setIngredient(Ingredients ingredient) {
+    public void setIngredient(Ingredient ingredient) {
         this.ingredient = ingredient;
     }
 
