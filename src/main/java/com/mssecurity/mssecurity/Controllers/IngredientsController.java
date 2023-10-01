@@ -1,13 +1,13 @@
 package com.mssecurity.mssecurity.Controllers;
 
-import com.mssecurity.mssecurity.Models.Ingredients;
-import com.mssecurity.mssecurity.Models.Recipe;
-import com.mssecurity.mssecurity.Repositories.IngredientsRepository;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import com.mssecurity.mssecurity.Models.Ingredients;
+import com.mssecurity.mssecurity.Repositories.IngredientsRepository;
 
 @CrossOrigin
 @RestController
@@ -15,8 +15,6 @@ import java.util.List;
 public class IngredientsController {
     @Autowired
     private IngredientsRepository theIngredientsRepository;
-
-
 
     @GetMapping("")
     public List<Ingredients> index() {return this.theIngredientsRepository.findAll();}
