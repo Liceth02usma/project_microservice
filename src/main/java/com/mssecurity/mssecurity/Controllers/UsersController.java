@@ -23,7 +23,11 @@ public class UsersController {
     @GetMapping("")
     public List<User> index() {return this.theUserRepository.findAll();}
 
-
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping
+    public User store(@RequestBody User newUser) {
+        return this.theUserRepository.save(newUser);
+    }
 
     @GetMapping("{id}")
     public User show(@PathVariable String id) {
