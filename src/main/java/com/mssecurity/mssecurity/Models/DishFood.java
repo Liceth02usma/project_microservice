@@ -1,6 +1,7 @@
 package com.mssecurity.mssecurity.Models;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.Data;
@@ -15,6 +16,9 @@ public class DishFood {
     private String description;
     private int value;
 
+    @DBRef
+    private Recipe recipe;
+
     public DishFood(String name, String description, int value) {
         this.name = name;
         this.description = description;
@@ -24,11 +28,19 @@ public class DishFood {
     public String get_id() {
         return _id;
     }
-
+    
     public String getName() {
         return name;
     }
+    
+    public Recipe getRecipe() {
+        return recipe;
+    }
 
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
+    }
+    
     public void setName(String name) {
         this.name = name;
     }
