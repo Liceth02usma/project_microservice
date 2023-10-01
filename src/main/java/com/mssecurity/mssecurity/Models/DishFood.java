@@ -45,6 +45,14 @@ public class DishFood {
         this.name = name;
     }
 
+    public Recipe getRecipe() {
+        return recipe;
+    }
+
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
+    }
+
     public String getDescription() {
         return description;
     }

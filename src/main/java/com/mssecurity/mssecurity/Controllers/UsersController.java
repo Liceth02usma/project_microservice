@@ -18,6 +18,10 @@ public class UsersController {
     private UserRepository theUserRepository;
     // @Autowired
     // private RoleRepository theRoleRepository;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7f85d7a186162602179f63c31491400d3e62b2ed
 
     @GetMapping("")
     public List<User> index() {return this.theUserRepository.findAll();}
