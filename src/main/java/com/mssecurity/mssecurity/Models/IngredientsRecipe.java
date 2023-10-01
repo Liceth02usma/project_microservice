@@ -22,6 +22,9 @@ public class IngredientsRecipe {
         this.recipe = recipe;
     }
 
+    public IngredientsRecipe() {
+    }
+
     public String get_id() {
         return _id;
     }

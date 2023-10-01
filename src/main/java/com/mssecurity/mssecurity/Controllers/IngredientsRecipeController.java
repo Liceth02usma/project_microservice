@@ -1,7 +1,6 @@
 package com.mssecurity.mssecurity.Controllers;
 
-import com.mssecurity.mssecurity.Models.Ingredients;
-import com.mssecurity.mssecurity.Models.IngredientsRecipe;
+import com.mssecurity.mssecurity.Models.*;
 import com.mssecurity.mssecurity.Repositories.IngredientsRecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,7 +20,7 @@ public class IngredientsRecipeController {
     @GetMapping("")
     public List<IngredientsRecipe> index() {return this.theIngredientsRecipeRepository.findAll();}
 
-    
+
 
 ///// PENDIENTE CREATE
 
@@ -31,6 +30,24 @@ public class IngredientsRecipeController {
                 .findById(id)
                 .orElse(null);
         return theIngredientsRecipe;
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("ingredients/{ingredients_id}/Recipe/{recipe_id}")
+    public IngredientsRecipe store(@PathVariable String ingredients_id,
+                                @PathVariable String Recipe_id) {
+        Ingredients theIngredients=this.theIngredientsRepository.findById(ingredients_id)
+                .orElse(null);
+        Permission thePermission=this.theRecipeRepository.findById(Recipe_id)
+                .orElse(null);
+        if(theIngredients!=null && thePermission!=null){
+            IngredientsRecipe newIngredientsRecipe=new IngredientsRecipe();
+            newIngredientsRecipe.setIngredient(theIngredients);
+            newIngredientsRecipe.setPermission(thePermission);
+            return this.theIngredientsRecipeRepository.save(newRolePermission);
+        }else{
+            return null;
+        }
     }
 
     @PutMapping("{id}")
