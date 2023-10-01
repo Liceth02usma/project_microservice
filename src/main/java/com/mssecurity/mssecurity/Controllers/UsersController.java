@@ -17,9 +17,9 @@ import com.mssecurity.mssecurity.Repositories.UserRepository;
 public class UsersController {
     @Autowired
     private UserRepository theUserRepository;
-
     @Autowired
     private RoleRepository theRoleRepository;
+
 
     @GetMapping("")
     public List<User> index() {
