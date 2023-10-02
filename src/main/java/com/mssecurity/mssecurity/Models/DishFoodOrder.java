@@ -20,7 +20,18 @@ public class DishFoodOrder {
     @DBRef
     private DishFood dishFood;
 
+    @DBRef
+    private Bill bill;
+
     public DishFoodOrder() {}
+
+    public Bill getBill() {
+        return bill;
+    }
+
+    public void setBill(Bill bill) {
+        this.bill = bill;
+    }
 
     public String get_id() {
         return _id;

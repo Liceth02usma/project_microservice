@@ -5,12 +5,14 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
+
 @Data
 @Document
 public class Reservation {
     @Id
     private String _id;
-    private String datetime;
+    private LocalDateTime datetime;
 
     @DBRef
     private User user;
@@ -18,7 +20,7 @@ public class Reservation {
     @DBRef
     private Table table;
 
-    public Reservation(String datetime) {
+    public Reservation(LocalDateTime datetime) {
         this.datetime = datetime;
     }
 
@@ -26,11 +28,11 @@ public class Reservation {
         return _id;
     }
 
-    public String getDatetime() {
+    public LocalDateTime getDatetime() {
         return datetime;
     }
 
-    public void setDatetime(String datetime) {
+    public void setDatetime(LocalDateTime datetime) {
         this.datetime = datetime;
     }
 

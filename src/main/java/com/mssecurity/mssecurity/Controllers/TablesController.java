@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.*;
 
 import com.mssecurity.mssecurity.Models.Table;
 import com.mssecurity.mssecurity.Repositories.TableRepository;
-
+@CrossOrigin
+@RestController
+@RequestMapping("private/tables")
 public class TablesController {
     @Autowired
     private TableRepository theTableRepository;

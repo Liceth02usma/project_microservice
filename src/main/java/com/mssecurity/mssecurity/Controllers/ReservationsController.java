@@ -2,6 +2,7 @@ package com.mssecurity.mssecurity.Controllers;
 
 import java.util.List;
 
+import com.mssecurity.mssecurity.Models.DishFoodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -77,6 +78,30 @@ public class ReservationsController {
             theReservation.setUser(theUser);
             theReservation.setTable(theTable);
             return this.theReservationRepository.save(theReservation);
+        } else {
+            return null;
+        }
+    }
+
+    @PutMapping("{reservation_id}/table")
+    public Reservation unMatchRT(@PathVariable String reservation_id) {
+        Reservation theActualReservation = this.theReservationRepository.findById(reservation_id).orElse(null);
+
+        if (theActualReservation != null) {
+            theActualReservation.setTable(null);
+            return this.theReservationRepository.save(theActualReservation);
+        } else {
+            return null;
+        }
+    }
+
+    @PutMapping("{reservation_id}/user")
+    public Reservation unMatchRU(@PathVariable String reservation_id) {
+        Reservation theActualReservation = this.theReservationRepository.findById(reservation_id).orElse(null);
+
+        if (theActualReservation != null) {
+            theActualReservation.setUser(null);
+            return this.theReservationRepository.save(theActualReservation);
         } else {
             return null;
         }

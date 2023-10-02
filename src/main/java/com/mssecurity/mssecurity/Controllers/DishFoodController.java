@@ -13,7 +13,7 @@ import com.mssecurity.mssecurity.Repositories.RecipeRepository;
 
 @CrossOrigin
 @RestController
-@RequestMapping("public")
+@RequestMapping("public/dishFood")
 public class DishFoodController {
     @Autowired
     private DishFoodRepository theDishFoodRepository;

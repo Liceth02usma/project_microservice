@@ -13,12 +13,12 @@ public class Bill {
     private String _id;
 
     private String datetime;
-    private String total;
+    private int total;
     
     @DBRef
     private DishFoodOrder dishFoodOrder;
 
-    public Bill(String datetime, String total) {
+    public Bill(String datetime, int total) {
         this.datetime = datetime;
         this.total = total;
     }
@@ -35,11 +35,11 @@ public class Bill {
         this.datetime = datetime;
     }
 
-    public String getTotal() {
+    public int getTotal() {
         return total;
     }
 
-    public void setTotal(String total) {
+    public void setTotal(int total) {
         this.total = total;
     }
 

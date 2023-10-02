@@ -2,6 +2,7 @@ package com.mssecurity.mssecurity.Controllers;
 
 import java.util.List;
 
+import com.mssecurity.mssecurity.Models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -25,5 +26,34 @@ public class RoleController {
     @PostMapping
     public Role store(@RequestBody Role newRole) {
         return this.theRoleRepository.save(newRole);
+    }
+
+    @GetMapping("{id}")
+    public Role show(@PathVariable String id) {
+        Role theRole = this.theRoleRepository.findById(id).orElse(null);
+        return theRole;
+    }
+
+    @PutMapping("{id}")
+    public Role update(@PathVariable String id, @RequestBody Role theNewRole) {
+        Role theActualRole = this.theRoleRepository.findById(id).orElse(null);
+        if (theActualRole != null) {
+            theActualRole.setName(theNewRole.getname());
+            theActualRole.setdescription(theNewRole.getdescription());
+            return this.theRoleRepository.save(theActualRole);
+        } else {
+            return null;
+        }
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("{id}")
+    public void destroy(@PathVariable String id) {
+        Role theRole = this.theRoleRepository
+                .findById(id)
+                .orElse(null);
+        if (theRole != null) {
+            this.theRoleRepository.delete(theRole);
+        }
     }
 }

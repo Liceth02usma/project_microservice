@@ -14,12 +14,22 @@ public class User {
     private String name;
     private String password;
 
+
     @DBRef
     private Role role;
 
-    public User(String name, String password) {
-        this.name = name;
-        this.password = password;
+
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public String get_id() {
