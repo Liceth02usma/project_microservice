@@ -18,7 +18,7 @@ public class User {
     @DBRef
     private Role role;
 
-
+    public User() {}
 
     public Role getRole() {
         return role;

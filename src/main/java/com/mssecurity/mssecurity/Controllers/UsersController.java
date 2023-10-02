@@ -1,5 +1,6 @@
 package com.mssecurity.mssecurity.Controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,17 @@ public class UsersController {
     public User show(@PathVariable String id) {
         User theUser = this.theUserRepository.findById(id).orElse(null);
         return theUser;
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("list")
+    public List<User> storeList(@RequestBody List<User> ListUser) {
+        List<User> savedUsers = new ArrayList<>();
+        for(User user : ListUser) {
+            User savedUser = this.theUserRepository.save(user);
+            savedUsers.add(savedUser);
+        }
+        return savedUsers;
     }
 
     @PutMapping("{id}")

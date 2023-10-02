@@ -1,5 +1,6 @@
 package com.mssecurity.mssecurity.Controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,14 +30,31 @@ public class RolePermissionsController {
         return this.theRolePermissionRepository.findAll();
     }
 
+    // @ResponseStatus(HttpStatus.CREATED)
+    // @PostMapping("role/{role_id}/permissions")
+    // public RolePermission storeListPermission(@PathVariable String role_id,
+    // @RequestBody List<Permission> listPermission) {
+    // Role theRole = this.theRoleRepository.findById(role_id).orElse(null);
+    // if (theRole != null) {
+    // List<RolePermission> savedRolePermission = new ArrayList<>();
+    // for (Permission permission : listPermission) {
+    // RolePermission newRolePermission = new RolePermission();
+    // newRolePermission.setRole(theRole);
+    // newRolePermission.setPermission(permission);
+    // savedRolePermission.add(newRolePermission).
+
+    // }
+    // return this.theRolePermissionRepository.save(newR);
+    // } else {
+    // return null;
+    // }
+    // }
+
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("role/{role_id}/permission/{permission_id}")
-    public RolePermission store(@PathVariable String role_id,
-            @PathVariable String permission_id) {
-        Role theRole = this.theRoleRepository.findById(role_id)
-                .orElse(null);
-        Permission thePermission = this.thePermissionRepository.findById(permission_id)
-                .orElse(null);
+    public RolePermission store(@PathVariable String role_id, @PathVariable String permission_id) {
+        Role theRole = this.theRoleRepository.findById(role_id).orElse(null);
+        Permission thePermission = this.thePermissionRepository.findById(permission_id).orElse(null);
         if (theRole != null && thePermission != null) {
             RolePermission newRolePermission = new RolePermission();
             newRolePermission.setRole(theRole);
@@ -47,12 +65,21 @@ public class RolePermissionsController {
         }
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("role/{role_id}/permissions")
+    public List<RolePermission> storeList(@RequestBody List<Permission> ListPermission, @PathVariable String role_id) {
+        List<RolePermission> savedRolePermissions = new ArrayList<>();
+        for (Permission permission : ListPermission) {
+            RolePermission savedPermission = this.store(role_id, this.thePermissionRepository.getPermission(permission.getUrl(), permission.getMethod()).get_id());
+            savedRolePermissions.add(savedPermission);
+        }
+        return savedRolePermissions;
+    }
+
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("{id}")
     public void destroy(@PathVariable String id) {
-        RolePermission theRolePermission = this.theRolePermissionRepository
-                .findById(id)
-                .orElse(null);
+        RolePermission theRolePermission = this.theRolePermissionRepository.findById(id).orElse(null);
         if (theRolePermission != null) {
             this.theRolePermissionRepository.delete(theRolePermission);
         }

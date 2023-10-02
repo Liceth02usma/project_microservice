@@ -1,8 +1,8 @@
 package com.mssecurity.mssecurity.Controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import com.mssecurity.mssecurity.Models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +32,17 @@ public class RoleController {
     public Role show(@PathVariable String id) {
         Role theRole = this.theRoleRepository.findById(id).orElse(null);
         return theRole;
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("list")
+    public List<Role> storeList(@RequestBody List<Role> ListRole) {
+        List<Role> savedRoles = new ArrayList<>();
+        for (Role Role : ListRole) {
+            Role savedRole = this.theRoleRepository.save(Role);
+            savedRoles.add(savedRole);
+        }
+        return savedRoles;
     }
 
     @PutMapping("{id}")
