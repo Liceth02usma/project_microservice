@@ -3,6 +3,7 @@ package com.mssecurity.mssecurity.Controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mssecurity.mssecurity.Controllers.Services.EncryptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,8 @@ public class UsersController {
     private UserRepository theUserRepository;
     @Autowired
     private RoleRepository theRoleRepository;
+    @Autowired
+    private EncryptionService encryptionService;
 
 
     @GetMapping("")
@@ -27,9 +30,18 @@ public class UsersController {
         return this.theUserRepository.findAll();
     }
 
+    @GetMapping("encriptacion")
+    public void encriptacion() {
+        List<User> UserE = this.theUserRepository.findAll();
+        for(User user : UserE){
+            user.setPassword(encryptionService.convertSHA256(user.getPassword()));
+        }
+    }
+
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public User store(@RequestBody User newUser) {
+        newUser.setPassword(encryptionService.convertSHA256(newUser.getPassword()));
         return this.theUserRepository.save(newUser);
     }
 

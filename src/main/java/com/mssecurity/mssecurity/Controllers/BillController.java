@@ -25,8 +25,7 @@ import com.mssecurity.mssecurity.Repositories.BillRepository;
 public class BillController {
     @Autowired
     private BillRepository theBillRepository;
-    // @Autowired
-    // private OrderRepository theOrderRepository;
+
 
 
     @GetMapping("")
