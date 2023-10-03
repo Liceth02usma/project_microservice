@@ -21,7 +21,7 @@ public class DishFoodController {
     @Autowired
     private RecipeRepository theRecipeRepository;
 
-    @GetMapping("menu")
+    @GetMapping("public/menu")
     public List<DishFood> index() {
         return this.theDishFoodRepository.findAll();
     }
@@ -32,7 +32,7 @@ public class DishFoodController {
         return this.theDishFoodRepository.save(newDishFood);
     }
 
-    @GetMapping("dishfood/{id}")
+    @GetMapping("public/dishfood/{id}")
     public DishFood show(@PathVariable String id) {
         DishFood theDishFood = this.theDishFoodRepository.findById(id).orElse(null);
         return theDishFood;
