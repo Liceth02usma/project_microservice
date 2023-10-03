@@ -1,5 +1,6 @@
 package com.mssecurity.mssecurity.Controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,19 +28,26 @@ public class RecipeController {
         return this.theRecipeRepository.save(newRecipe);
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("list")
+    public List<Recipe> storeList(@RequestBody List<Recipe> ListRecipe) {
+        List<Recipe> savedRecipes = new ArrayList<>();
+        for (Recipe Recipe : ListRecipe) {
+            Recipe savedRecipe = this.theRecipeRepository.save(Recipe);
+            savedRecipes.add(savedRecipe);
+        }
+        return savedRecipes;
+    }
+
     @GetMapping("{id}")
     public Recipe show(@PathVariable String id) {
-        Recipe theRecipe = this.theRecipeRepository
-                .findById(id)
-                .orElse(null);
+        Recipe theRecipe = this.theRecipeRepository.findById(id).orElse(null);
         return theRecipe;
     }
 
     @PutMapping("{id}")
     public Recipe update(@PathVariable String id, @RequestBody Recipe theNewRecipe) {
-        Recipe theActualRecipe = this.theRecipeRepository
-                .findById(id)
-                .orElse(null);
+        Recipe theActualRecipe = this.theRecipeRepository.findById(id).orElse(null);
         if (theActualRecipe != null) {
             theActualRecipe.setName(theNewRecipe.getName());
             theActualRecipe.setInstructions(theNewRecipe.getInstructions());

@@ -51,6 +51,14 @@ public class IngredientsRecipeController {
         }
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("recipe/{recipe_id}/ingredients")
+    public void storeList(@RequestBody List<Ingredient> ListIngredient, @PathVariable String recipe_id) {
+        for (Ingredient ingredient : ListIngredient) {
+            this.store(ingredient.get_id(), recipe_id);
+        }
+    }
+
     @PutMapping("{id}")
     public IngredientsRecipe update(@PathVariable String id, @RequestBody IngredientsRecipe theNewIngredientsRecipe) {
         IngredientsRecipe theActualIngredientsRecipe = this.theIngredientsRecipeRepository.findById(id).orElse(null);

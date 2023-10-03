@@ -1,6 +1,5 @@
 package com.mssecurity.mssecurity.Controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,13 +66,13 @@ public class RolePermissionsController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("role/{role_id}/permissions")
-    public List<RolePermission> storeList(@RequestBody List<Permission> ListPermission, @PathVariable String role_id) {
-        List<RolePermission> savedRolePermissions = new ArrayList<>();
+    public void storeList(@RequestBody List<Permission> ListPermission, @PathVariable String role_id) {
+        // List<RolePermission> savedRolePermissions = new ArrayList<>();
         for (Permission permission : ListPermission) {
-            RolePermission savedPermission = this.store(role_id, this.thePermissionRepository.getPermission(permission.getUrl(), permission.getMethod()).get_id());
-            savedRolePermissions.add(savedPermission);
+            this.store(role_id, permission.get_id());
+            // savedRolePermissions.add(savedPermission);
         }
-        return savedRolePermissions;
+        // return savedRolePermissions;
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
