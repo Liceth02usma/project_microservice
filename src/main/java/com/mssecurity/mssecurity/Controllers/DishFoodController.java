@@ -13,7 +13,7 @@ import com.mssecurity.mssecurity.Repositories.RecipeRepository;
 
 @CrossOrigin
 @RestController
-@RequestMapping("public/dishFood")
+@RequestMapping("")
 public class DishFoodController {
     @Autowired
     private DishFoodRepository theDishFoodRepository;
@@ -27,19 +27,19 @@ public class DishFoodController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("dishfood")
+    @PostMapping("private/dishfood")
     public DishFood store(@RequestBody DishFood newDishFood) {
         return this.theDishFoodRepository.save(newDishFood);
     }
 
     @GetMapping("dishfood/{id}")
-    public DishFood show(@PathVariable String id, @RequestBody DishFood newDishFood) {
+    public DishFood show(@PathVariable String id) {
         DishFood theDishFood = this.theDishFoodRepository.findById(id).orElse(null);
         return theDishFood;
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PutMapping("dishfood/{id}")
+    @PutMapping("private/dishfood/{id}")
     public DishFood update(@PathVariable String id, @RequestBody DishFood newDishFood) {
         DishFood theDishFood = this.theDishFoodRepository.findById(id).orElse(null);
 
@@ -55,7 +55,7 @@ public class DishFoodController {
 
     }
 
-    @DeleteMapping("dishfood/{id}")
+    @DeleteMapping("private/dishfood/{id}")
     public void destroy(@PathVariable String id) {
         DishFood theDishFood = this.theDishFoodRepository.findById(id).orElse(null);
         if (theDishFood != null) {
@@ -63,7 +63,7 @@ public class DishFoodController {
         }
     }
 
-    @PutMapping("dishfood/{dishfood_id}/recipe/{recipe_id}")
+    @PutMapping("private/dishfood/{dishfood_id}/recipe/{recipe_id}")
     public DishFood matchDishfoodRecipe(@PathVariable String dishfood_id, @PathVariable String recipe_id) {
 
         DishFood theDishFood = this.theDishFoodRepository.findById(dishfood_id).orElse(null);
@@ -77,7 +77,7 @@ public class DishFoodController {
         }
     }
 
-    @PutMapping("dishfood/{dishfood_id}/recipe")
+    @PutMapping("private/dishfood/{dishfood_id}/recipe")
     public DishFood unMatchDishfoodRecipe(@PathVariable String dishfood_id) {
 
         DishFood theDishFood = this.theDishFoodRepository.findById(dishfood_id).orElse(null);

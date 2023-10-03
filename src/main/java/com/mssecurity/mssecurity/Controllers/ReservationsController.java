@@ -30,7 +30,7 @@ public class ReservationsController {
     }
 
     @GetMapping("{id}")
-    public Reservation show(@PathVariable String id, @RequestBody Reservation newReservation) {
+    public Reservation show(@PathVariable String id) {
         Reservation theReservation = this.theReservationRepository.findById(id).orElse(null);
         return theReservation;
     }

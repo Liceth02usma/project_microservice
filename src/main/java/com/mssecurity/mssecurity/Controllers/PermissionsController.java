@@ -28,6 +28,12 @@ public class PermissionsController {
         return this.thePermissionRepository.save(newPermission);
     }
 
+    @GetMapping("{id}")
+    public Permission show(@PathVariable String id) {
+        Permission thePermission = this.thePermissionRepository.findById(id).orElse(null);
+        return thePermission;
+    }
+
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("list")
     public List<Permission> storeList(@RequestBody List<Permission> ListPermission) {
