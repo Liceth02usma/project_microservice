@@ -32,7 +32,7 @@ public class OrdersController {
     }
 
     @GetMapping("{id}")
-    public Order show(@PathVariable String id, @RequestBody Order newOrder) {
+    public Order show(@PathVariable String id) {
         Order theOrder = this.theOrderRepository.findById(id).orElse(null);
         return theOrder;
     }

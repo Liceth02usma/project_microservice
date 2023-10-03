@@ -49,6 +49,12 @@ public class RolePermissionsController {
     // }
     // }
 
+    @GetMapping("{id}")
+    public RolePermission show(@PathVariable String id) {
+        RolePermission theRolePermission = this.theRolePermissionRepository.findById(id).orElse(null);
+        return theRolePermission;
+    }
+
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("role/{role_id}/permission/{permission_id}")
     public RolePermission store(@PathVariable String role_id, @PathVariable String permission_id) {
