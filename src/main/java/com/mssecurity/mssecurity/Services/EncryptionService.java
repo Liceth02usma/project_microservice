@@ -1,4 +1,4 @@
-package com.mssecurity.mssecurity.Controllers.Services;
+package com.mssecurity.mssecurity.Services;
 
 import org.springframework.stereotype.Service;
 

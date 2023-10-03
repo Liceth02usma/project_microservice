@@ -75,6 +75,7 @@ public class RolePermissionsController {
     public void storeList(@RequestBody List<Permission> ListPermission, @PathVariable String role_id) {
         // List<RolePermission> savedRolePermissions = new ArrayList<>();
         for (Permission permission : ListPermission) {
+            System.out.println(permission.get_id());
             this.store(role_id, permission.get_id());
             // savedRolePermissions.add(savedPermission);
         }

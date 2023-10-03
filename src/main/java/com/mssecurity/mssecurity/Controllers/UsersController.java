@@ -3,7 +3,6 @@ package com.mssecurity.mssecurity.Controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mssecurity.mssecurity.Controllers.Services.EncryptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +11,7 @@ import com.mssecurity.mssecurity.Models.Role;
 import com.mssecurity.mssecurity.Models.User;
 import com.mssecurity.mssecurity.Repositories.RoleRepository;
 import com.mssecurity.mssecurity.Repositories.UserRepository;
+import com.mssecurity.mssecurity.Services.EncryptionService;
 
 @CrossOrigin
 @RestController
@@ -24,19 +24,21 @@ public class UsersController {
     @Autowired
     private EncryptionService encryptionService;
 
-
     @GetMapping("")
     public List<User> index() {
         return this.theUserRepository.findAll();
     }
 
-    @GetMapping("encriptacion")
-    public void encriptacion() {
-        List<User> UserE = this.theUserRepository.findAll();
-        for(User user : UserE){
-            user.setPassword(encryptionService.convertSHA256(user.getPassword()));
-        }
-    }
+    // @PutMapping("encryption")
+    // public void encryption() {
+    //     List<User> UserE = this.theUserRepository.findAll();
+    //     for (User user : UserE) {
+    //         System.out.println(user.getName() + ":" + user.getPassword());
+    //         user.setPassword(encryptionService.convertSHA256(user.getPassword()));
+    //         System.out.println(user.getName() + ":" + user.getPassword());
+    //         this.theUserRepository.save(user);
+    //     }
+    // }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
@@ -55,7 +57,7 @@ public class UsersController {
     @PostMapping("list")
     public List<User> storeList(@RequestBody List<User> ListUser) {
         List<User> savedUsers = new ArrayList<>();
-        for(User user : ListUser) {
+        for (User user : ListUser) {
             User savedUser = this.theUserRepository.save(user);
             savedUsers.add(savedUser);
         }
@@ -105,7 +107,7 @@ public class UsersController {
 
         if (theActualUser != null) {
             theActualUser.setRole(null);
-            return this.theUserRepository.save(theActualUser); 
+            return this.theUserRepository.save(theActualUser);
         } else {
             return null;
         }

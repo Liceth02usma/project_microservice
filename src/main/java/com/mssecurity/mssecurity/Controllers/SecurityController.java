@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.mssecurity.mssecurity.Models.User;
 import com.mssecurity.mssecurity.Repositories.UserRepository;
+import com.mssecurity.mssecurity.Services.EncryptionService;
 import com.mssecurity.mssecurity.Services.JwtService;
 
 import jakarta.servlet.http.HttpServletResponse;
@@ -22,11 +23,14 @@ public class SecurityController {
     @Autowired
     private JwtService jwtService;
 
+    @Autowired
+    private EncryptionService encryptionService;
+
     @PostMapping("log-in")
     public String login(@RequestBody User theUser, final HttpServletResponse response) throws IOException {
         String token = "";
         User actualUser = this.theUserRepository.getUserByID(theUser.get_id());
-        if (actualUser != null && actualUser.getPassword().equals(theUser.getPassword())) {
+        if (actualUser != null && actualUser.getPassword().equals(encryptionService.convertSHA256(theUser.getPassword()))) {
             token = jwtService.generateToken(actualUser);
         } else {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
