@@ -4,8 +4,6 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.LocalDateTime;
-
 @Data
 @Document()
 public class Ingredient {
@@ -14,15 +12,13 @@ public class Ingredient {
     private String _id;
 
     private String name;
-    private LocalDateTime dateInquisition;
-    private int amount;
-    private String category;
+    private String dateInquisition;
+    private int value;
 
-    public Ingredient(String name, LocalDateTime dateInquisition, int amount, String category) {
+    public Ingredient(String name, String dateInquisition, int value) {
         this.name = name;
         this.dateInquisition = dateInquisition;
-        this.amount = amount;
-        this.category = category;
+        this.value = value;
     }
 
     public String get_id() {
@@ -37,27 +33,19 @@ public class Ingredient {
         this.name = name;
     }
 
-    public LocalDateTime getDateInquisition() {
+    public String getDateInquisition() {
         return dateInquisition;
     }
 
-    public void setDateInquisition(LocalDateTime dateInquisition) {
+    public void setDateInquisition(String dateInquisition) {
         this.dateInquisition = dateInquisition;
     }
 
-    public int getAmount() {
-        return amount;
+    public int getValue() {
+        return value;
     }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
+    public void setValue(int value) {
+        this.value = value;
     }
 }

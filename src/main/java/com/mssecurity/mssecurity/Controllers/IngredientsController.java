@@ -1,5 +1,6 @@
 package com.mssecurity.mssecurity.Controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,11 +25,20 @@ public class IngredientsController {
         return this.theIngredientRepository.save(newIngredient);
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("list")
+    public List<Ingredient> storeList(@RequestBody List<Ingredient> ListIngredient) {
+        List<Ingredient> savedIngredients = new ArrayList<>();
+        for (Ingredient Ingredient : ListIngredient) {
+            Ingredient savedIngredient = this.theIngredientRepository.save(Ingredient);
+            savedIngredients.add(savedIngredient);
+        }
+        return savedIngredients;
+    }
+
     @GetMapping("{id}")
     public Ingredient show(@PathVariable String id) {
-        Ingredient theIngredient = this.theIngredientRepository
-                .findById(id)
-                .orElse(null);
+        Ingredient theIngredient = this.theIngredientRepository.findById(id).orElse(null);
         return theIngredient;
     }
 
@@ -39,9 +49,8 @@ public class IngredientsController {
                 .orElse(null);
         if (theActualIngredient != null) {
             theActualIngredient.setName(theNewIngredient.getName());
-            theActualIngredient.setAmount(theNewIngredient.getAmount());
-            theActualIngredient.setCategory(theNewIngredient.getCategory());
             theActualIngredient.setDateInquisition(theNewIngredient.getDateInquisition());
+            theActualIngredient.setValue(theNewIngredient.getValue());
             return this.theIngredientRepository.save(theActualIngredient);
         } else {
             return null;
@@ -51,13 +60,10 @@ public class IngredientsController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("{id}")
     public void destroy(@PathVariable String id) {
-        Ingredient theIngredient = this.theIngredientRepository
-                .findById(id)
-                .orElse(null);
+        Ingredient theIngredient = this.theIngredientRepository.findById(id).orElse(null);
         if (theIngredient != null) {
             this.theIngredientRepository.delete(theIngredient);
         }
     }
-
 
 }

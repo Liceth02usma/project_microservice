@@ -13,7 +13,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("private/DishFood-Order")
+@RequestMapping("private/dishfood-order")
 public class DishFoodOrderController {
     @Autowired
     private DishFoodOrderRepository theDishFoodOrderRepository;
